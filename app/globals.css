@@ -1,26 +1,50 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+button,
+ul li {
+  cursor: pointer;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* button animation 6s  */
+.animatedButton {
+  position: relative;
+  cursor: pointer;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.animatedButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-image: linear-gradient(to right, white, white),
+    linear-gradient(to bottom, white, white),
+    linear-gradient(to left, white, white),
+    linear-gradient(to top, white, white);
+
+  background-position: top left, top right, bottom right, bottom left;
+
+  background-repeat: no-repeat;
+
+  animation: draw-border 6s infinite linear forwards;
+}
+
+@keyframes draw-border {
+  0% {
+    background-size: 0 6px, 6px 0, 0 6px, 6px 0;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  25% {
+    background-size: 100% 6px, 6px 0, 0 6px, 6px 0;
+  }
+  50% {
+    background-size: 100% 6px, 6px 100%, 0 6px, 6px 0;
+  }
+  75% {
+    background-size: 100% 6px, 6px 100%, 100% 6px, 6px 0;
+  }
+  100% {
+    background-size: 100% 6px, 6px 100%, 100% 6px, 6px 100%;
+  }
 }
