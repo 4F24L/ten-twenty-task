@@ -9,13 +9,10 @@ export default function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const newIndex = (currentIndex + 1) % heroData.length;
-  const showNextImage = () => {
-    setCurrentIndex(newIndex);
-  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      showNextImage();
+      setCurrentIndex((currentIndex)=> (currentIndex + 1) % heroData.length);
     }, 6000);
 
     return () => clearTimeout(timer);
@@ -34,7 +31,7 @@ export default function HeroSection() {
         <div className="mt-32 sm:mt-16 flex items-center gap-8">
           <button
             key={currentIndex}
-            onClick={showNextImage}
+            onClick={() => setCurrentIndex(newIndex)}
             className="p-5 bg-black/20 w-24 h-24 animatedButton flex justify-center items-center"
             aria-label="Next Image"
           >

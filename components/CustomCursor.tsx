@@ -8,7 +8,7 @@ export default function CustomCursor() {
     const slides = document.querySelectorAll(".slider-cursor");
 
 
-    const onMouseMove = (event) => {
+    const onMouseMove = (event: MouseEvent) => {
       const { clientX, clientY } = event;
       gsap.to(cursor, {
         x: clientX,

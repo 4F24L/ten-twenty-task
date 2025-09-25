@@ -1,5 +1,4 @@
-// hooks/useSlider.ts
-import { clientData } from "@/lib/slidesdata";
+import { clientData } from "@/types/types";
 import { useState } from "react";
 
 export const useSlider = (slides: clientData[]) => {
