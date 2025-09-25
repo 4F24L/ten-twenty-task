@@ -2,11 +2,12 @@
 import { useSlider } from "@/hooks/useSlider";
 import { slidesData } from "@/lib/clientData";
 import Image from "next/image";
+import CustomCursor from "./CustomCursor";
 
 export default function ClientSection() {
   const { currentIndex, dragHandlers } = useSlider(slidesData);
 
-  const activeSlide = slidesData[currentIndex];
+  const currentSlide = slidesData[currentIndex];
 
   return (
     <div className="h-screen w-full py-12 space-y-8">
@@ -28,7 +29,7 @@ export default function ClientSection() {
             const prevIndex = (currentIndex - 1 + totalSlides) % totalSlides;
             const nextIndex = (currentIndex + 1) % totalSlides;
 
-            let positionClass = "opacity-0 scale-90";
+            let positionClass = "opacity-0 ";
             if (index === currentIndex) {
               positionClass =
                 "z-20 opacity-100 scale-110 rotate-0 brightness-100";
@@ -43,8 +44,7 @@ export default function ClientSection() {
             return (
               <div
                 key={slide.id}
-                className={`absolute w-72 h-[400px] shadow-xl overflow-hidden cursor-pointer 
-        transition-all duration-500 ease-in-out ${positionClass}`}
+                className={`absolute w-72 h-[400px] shadow-xl overflow-hidden transition-all duration-500 ease-in-out ${positionClass} cursor-none slider-cursor`}
               >
                 <Image
                   src={slide.img}
@@ -59,11 +59,14 @@ export default function ClientSection() {
 
         <div className="text-center my-10">
           <h2 className="text-2xl font-medium text-gray-800">
-            {activeSlide.name}
+            {currentSlide.name}
           </h2>
-          <p className="text-md text-gray-500">{activeSlide.location}</p>
+          <p className="text-md text-gray-500">{currentSlide.location}</p>
         </div>
       </div>
+
+      
+      <CustomCursor />
     </div>
   );
 }

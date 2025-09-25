@@ -29,4 +29,22 @@ export const slidesData : clientData[] = [
         img: slide3,
         location: "London, England"
     },
+    {
+        id:3,
+        name: "Client 3",
+        img: slide3,
+        location: "London, England"
+    },
+    {
+        id:3,
+        name: "Client 3",
+        img: slide3,
+        location: "London, England"
+    },
+    {
+        id:3,
+        name: "Client 3",
+        img: slide3,
+        location: "London, England"
+    },
 ]

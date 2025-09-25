@@ -1,11 +1,10 @@
 // hooks/useSlider.ts
-
-import { useState, useRef } from 'react';
-import { clientData } from '@/lib/clientData';
+import { useState } from "react";
+import { clientData } from "@/lib/clientData";
 
 export const useSlider = (slides: clientData[]) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const dragStartX = useRef<number | null>(null);
+  const [startX, setStartX] = useState<number | null>(null);
   const totalSlides = slides.length;
 
   const goToNext = () => {
@@ -16,19 +15,19 @@ export const useSlider = (slides: clientData[]) => {
     setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
   };
 
-  const handleDragStart = (e: React.MouseEvent | React.TouchEvent) => {
-    dragStartX.current = 'touches' in e ? e.touches[0].clientX : e.clientX;
+  const handleStart = (x: number) => {
+    setStartX(x);
   };
 
-  const handleDragEnd = (e: React.MouseEvent | React.TouchEvent) => {
-    if (dragStartX.current === null) return;
-    const dragEndX = 'changedTouches' in e ? e.changedTouches[0].clientX : e.clientX;
-    const dragDistance = dragEndX - dragStartX.current;
+  const handleEnd = (x: number) => {
+    if (startX === null) return;
+    const distance = x - startX;
 
-    if (Math.abs(dragDistance) > 50) {
-      dragDistance > 0 ? goToPrev() : goToNext();
+    if (Math.abs(distance) > 50) {
+      distance > 0 ? goToPrev() : goToNext();
     }
-    dragStartX.current = null;
+
+    setStartX(null);
   };
 
   return {
@@ -36,11 +35,11 @@ export const useSlider = (slides: clientData[]) => {
     goToNext,
     goToPrev,
     dragHandlers: {
-      onMouseDown: handleDragStart,
-      onMouseUp: handleDragEnd,
-      onMouseLeave: handleDragEnd,
-      onTouchStart: handleDragStart,
-      onTouchEnd: handleDragEnd,
+      onMouseDown: (e: React.MouseEvent) => handleStart(e.clientX),
+      onMouseUp: (e: React.MouseEvent) => handleEnd(e.clientX),
+      onTouchStart: (e: React.TouchEvent) => handleStart(e.touches[0].clientX),
+      onTouchEnd: (e: React.TouchEvent) =>
+        handleEnd(e.changedTouches[0].clientX),
     },
   };
 };
