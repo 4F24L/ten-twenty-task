@@ -22,16 +22,16 @@ export default function HeroSection() {
   }, [currentIndex]);
 
   return (
-    <div className="relative w-full h-screen text-white">
-      <div className=" absolute w-full h-full bg-black/25 px-8 z-10">
+    <div className="relative w-full h-screen text-white ">
+      <div className=" absolute w-full h-full bg-black/25 sm:px-8">
         <NavBar />
       </div>
 
-      <div className="absolute top-[40%] left-[10%] flex flex-col gap-7 z-20">
+      <div className="absolute top-[40%] left-8 sm:top-[40%] sm:left-[10%] flex flex-col gap-7 z-20">
         <p className="text-lg">Welcome To TenTwenty Farms</p>
-        <p className="text-6xl">From our Farms {<br />} to your hands</p>
+        <p className="text-5xl sm:text-6xl">From our Farms {<br />} to your hands</p>
 
-        <div className="mt-16 z-10 flex items-center gap-8">
+        <div className="mt-32 sm:mt-16 flex items-center gap-8">
           <button
             key={currentIndex}
             onClick={showNextImage}

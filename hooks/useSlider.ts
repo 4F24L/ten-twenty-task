@@ -1,6 +1,6 @@
 // hooks/useSlider.ts
+import { clientData } from "@/lib/slidesdata";
 import { useState } from "react";
-import { clientData } from "@/lib/clientData";
 
 export const useSlider = (slides: clientData[]) => {
   const [currentIndex, setCurrentIndex] = useState(0);

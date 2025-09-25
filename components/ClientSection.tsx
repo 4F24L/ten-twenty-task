@@ -1,18 +1,33 @@
 "use client";
 import { useSlider } from "@/hooks/useSlider";
-import { slidesData } from "@/lib/clientData";
+import { slidesData } from "@/lib/slidesdata";
 import Image from "next/image";
 import CustomCursor from "./CustomCursor";
+import { useEffect } from "react";
+import gsap from "gsap";
 
 export default function ClientSection() {
   const { currentIndex, dragHandlers } = useSlider(slidesData);
+
+  useEffect(() => {
+    gsap.from("#slide-text", {
+        opacity:0,
+        y:-10,
+        scale:0.95,
+        duration: 0.77,
+
+    })
+  
+    
+  }, [currentIndex])
+  
 
   const currentSlide = slidesData[currentIndex];
 
   return (
     <div className="h-screen w-full py-12 space-y-8">
-      <p className=" text-4xl text-center">Quality Products</p>
-      <p className=" max-w-xl mx-auto">
+      <p className="text-3xl sm:text-4xl text-center ">Quality Products</p>
+      <p className="text-center text-[#7A7777] sm:max-w-xl mx-auto px-6 sm:px-0">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -21,7 +36,7 @@ export default function ClientSection() {
 
       <div className="flex flex-col items-center justify-center w-full">
         <div
-          className="relative w-full h-96 my-16 flex items-center justify-center"
+          className="relative w-full h-[460px] sm:h-[550px] flex items-center justify-center overflow-x-hidden"
           {...dragHandlers}
         >
           {slidesData.map((slide, index) => {
@@ -35,16 +50,16 @@ export default function ClientSection() {
                 "z-20 opacity-100 scale-110 rotate-0 brightness-100";
             } else if (index === prevIndex) {
               positionClass =
-                "z-10 -translate-x-[160%] translate-y-[10%] rotate-[-10deg] brightness-75";
+                "z-10 -translate-x-[125%] sm:-translate-x-[160%] translate-y-[12%] sm:translate-y-[10%] rotate-[-10deg] brightness-75";
             } else if (index === nextIndex) {
               positionClass =
-                "z-10 translate-x-[160%] translate-y-[10%] rotate-[10deg] brightness-75";
+                "z-10 translate-x-[125%] sm:translate-x-[160%] translate-y-[12%] sm:translate-y-[10%] rotate-[10deg] brightness-75";
             }
 
             return (
               <div
                 key={slide.id}
-                className={`absolute w-72 h-[400px] shadow-xl overflow-hidden transition-all duration-500 ease-in-out ${positionClass} cursor-none slider-cursor`}
+                className={`absolute w-52 sm:w-72 h-[320px] sm:h-[400px] shadow-xl overflow-hidden transition-all duration-500 ease-in-out ${positionClass} cursor-none slider-cursor`}
               >
                 <Image
                   src={slide.img}
@@ -57,11 +72,11 @@ export default function ClientSection() {
           })}
         </div>
 
-        <div className="text-center my-10">
+        <div id="slide-text" className="text-center mb-7">
           <h2 className="text-2xl font-medium text-gray-800">
             {currentSlide.name}
           </h2>
-          <p className="text-md text-gray-500">{currentSlide.location}</p>
+          <p className="text-md text-2xl text-gray-500">{currentSlide.location}</p>
         </div>
       </div>
 

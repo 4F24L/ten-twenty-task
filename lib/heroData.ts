@@ -1,13 +1,7 @@
+import { ImageData } from '@/types/types'
 import heroImg from '../public/hero-img.jpg'
 import heroImg2 from '../public/hero-img2.jpg'
 import heroImg3 from '../public/hero-img3.jpg'
-import { StaticImageData } from 'next/image'
-
-export interface ImageData {
-    id: number
-    img: StaticImageData,
-    alt: string
-}
 
 export const heroData: ImageData[] = [
     {
